@@ -1,0 +1,151 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Aranceles con Botones Redondeados</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th {
+            background-color: #c6e0b4; /* Verde claro */
+            padding: 10px;
+            text-align: center;
+        }
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+        .botones {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        .boton {
+            padding: 8px 15px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            border-radius: 20px; /* Botones redondeados */
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .eliminar {
+            background-color: #e74c3c; /* Rojo */
+        }
+        .eliminar:hover {
+            background-color: #c0392b; /* Rojo más oscuro */
+        }
+        .editar {
+            background-color: #3498db; /* Azul */
+        }
+        .editar:hover {
+            background-color: #2980b9; /* Azul más oscuro */
+        }
+        .ampliar {
+            background-color: #2ecc71; /* Verde */
+        }
+        .ampliar:hover {
+            background-color: #27ae60; /* Verde más oscuro */
+        }
+    </style>
+</head>
+<body>
+    <h1>Tabla de Aranceles y Ofertas Educativas</h1>
+    <table id="tablaAranceles">
+        <thead>
+            <tr>
+                <th colspan="2">Tipo arancel</th>
+                <th colspan="2">Oferta educativa</th>
+                <th colspan="2">Sede</th>
+                <th colspan="2">Cohorte</th>
+                <th>Acciones</th>
+            </tr>
+            <tr>
+                <th>Cod.</th>
+                <th>Descripción</th>
+                <th>Cod.</th>
+                <th>Descripción</th>
+                <th>Cod.</th>
+                <th>Descripción</th>
+                <th>Cod.</th>
+                <th>Descripción</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas se cargarán dinámicamente con jQuery -->
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            // Datos de ejemplo en formato JSON
+            const datos = [
+                { arancelCod: 'AGR', arancelDesc: 'Arancel General', ofertaCod: '0000AB', ofertaDesc: 'ABOGACÍA', sedeCod: 'MDA', sedeDesc: 'Mar de Ajó', cohorteCod: '00', cohorteDesc: 'Sin cohorte' },
+                { arancelCod: 'APA', arancelDesc: 'Arancel Parcial', ofertaCod: '0000AS', ofertaDesc: 'ANALISTA DE SISTEMAS', sedeCod: 'MDP', sedeDesc: 'Mar del Plata', cohorteCod: '01', cohorteDesc: 'Cohorte 1' },
+                { arancelCod: 'DAM', arancelDesc: 'Derecho alumno matriculado', ofertaCod: '0000CP', ofertaDesc: 'CONTADOR PÚBLICO', sedeCod: 'DOL', sedeDesc: 'Dolores', cohorteCod: '02', cohorteDesc: 'Cohorte 2' },
+                { arancelCod: 'MAT', arancelDesc: 'Matrícula', ofertaCod: '0000II', ofertaDesc: 'INGENIERÍA EN INFORMÁTICA', sedeCod: 'DIS', sedeDesc: 'Distancia', cohorteCod: '...', cohorteDesc: '...' },
+                { arancelCod: 'MEX', arancelDesc: 'Mesa de Examen', ofertaCod: '0000LA', ofertaDesc: 'LICENCIATURA EN ADMINISTRACIÓN', sedeCod: 'CAB', sedeDesc: 'CABA', cohorteCod: '', cohorteDesc: '' },
+                { arancelCod: 'MMA', arancelDesc: 'Mantenimiento de Matrícula', ofertaCod: '0000LC', ofertaDesc: 'LICENCIATURA EN COMERCIALIZACIÓN', sedeCod: '', sedeDesc: '', cohorteCod: '', cohorteDesc: '' }
+            ];
+
+            // Función para cargar los datos en la tabla
+            function cargarTabla() {
+                const tbody = $('#tablaAranceles tbody');
+                tbody.empty(); // Limpiar el contenido actual de la tabla
+
+                datos.forEach(function (item, index) {
+                    const fila = `<tr>
+                        <td>${item.arancelCod}</td>
+                        <td>${item.arancelDesc}</td>
+                        <td>${item.ofertaCod}</td>
+                        <td>${item.ofertaDesc}</td>
+                        <td>${item.sedeCod}</td>
+                        <td>${item.sedeDesc}</td>
+                        <td>${item.cohorteCod}</td>
+                        <td>${item.cohorteDesc}</td>
+                        <td>
+                            <div class="botones">
+                                <button class="boton eliminar" onclick="eliminarFila(${index})">Eliminar</button>
+                                <button class="boton editar" onclick="editarFila(${index})">Editar</button>
+                                <button class="boton ampliar" onclick="ampliarFila(${index})">Ampliar</button>
+                            </div>
+                        </td>
+                    </tr>`;
+                    tbody.append(fila);
+                });
+            }
+
+            // Cargar los datos iniciales en la tabla
+            cargarTabla();
+        });
+
+        // Función para eliminar una fila
+        function eliminarFila(index) {
+            alert('Eliminar fila: ' + index);
+        }
+
+        // Función para editar una fila
+        function editarFila(index) {
+            alert('Editar fila: ' + index);
+        }
+
+        // Función para ampliar una fila
+        function ampliarFila(index) {
+            alert('Ampliar detalles de la fila: ' + index);
+        }
+    </script>
+</body>
+</html>
